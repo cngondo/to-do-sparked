@@ -1,0 +1,4 @@
+# Java and Gradle #
+############
+build/
+.gradle/
