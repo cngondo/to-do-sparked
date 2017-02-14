@@ -1,7 +1,13 @@
 <h1>Task list!</h1>
-
+<!-- display the task packed in the model -->
+#if ($task)
+	<p>Current Task:</p>
+	<p>$task.getDescription()</p>
+#else
+	<p>No Tasks!</p>
+#end
 <p>Add a new Task:</p>
-
+<!-- Using a POST method to edit information. Spark will send data to the tasks route -->
 <form action="/tasks" method="post">
   <label for="description">Task Description</label>
   <input id="description" name="description" type="text">
