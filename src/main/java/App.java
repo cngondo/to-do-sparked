@@ -1,7 +1,9 @@
-import java.util.HashMap;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class App {
    
@@ -25,10 +27,16 @@ public class App {
 	    post("/task", (request, response) -> {
 	    	Map<String, Object> model = new HashMap<String, Object>();
 
-	    	String description = request.queryparams("description");
+	    	//save our multiple tasks into an array List
+	    	ArrayList<Task> tasks = request.session.attribute("task", newTask);
+	    	if(tasks == null){
+	    		tasks = new ArrayList<Task>();
+	    		request.session.attribute("task", newTask);
+	    	}
 	    	//save our task object to the user session
+	    	String description = request.queryparams("description");
 	    	Task newTask = new Task(description);
-	    	request.session.attribute("task", newTask);
+	    	tasks.add(newTask);
 
 	    	model.put("template","templates/success.vtl");
 	    	return new ModelAndView(model, layout);
