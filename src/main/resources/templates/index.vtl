@@ -1,8 +1,13 @@
 <h1>Task list!</h1>
 <!-- display the task packed in the model -->
 #if ($task)
-	<p>Current Task:</p>
-	<p>$task.getDescription()</p>
+	<!-- <p>Current Task:</p>
+	<p>$task.getDescription()</p> -->
+	<ul>
+	  #foreach ($task in $tasks)
+		<li>$task.getDescription()</li>
+	  #end
+	</ul>
 #else
 	<p>No Tasks!</p>
 #end
